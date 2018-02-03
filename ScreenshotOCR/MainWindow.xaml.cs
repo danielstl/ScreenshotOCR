@@ -24,5 +24,10 @@ namespace ScreenshotOCR
         {
             InitializeComponent();
         }
+
+        private void screenshotButton_Click(object sender, RoutedEventArgs e)
+        {
+            new ScreenshotTaker().Show();
+        }
     }
 }
