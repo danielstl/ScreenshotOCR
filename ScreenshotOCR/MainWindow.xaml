@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ScreenshotOCR"
         mc:Ignorable="d"
-        Title="MainWindow" Height="235" Width="500">
+        Title="MainWindow" Height="170" Width="500">
     <Grid>
         <Label Content="ScreenshotOCR" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe UI Semilight"/>
-        <Button x:Name="screenshotButton" Content="Take screenshot" HorizontalAlignment="Left" Height="142" Margin="10,52,0,0" VerticalAlignment="Top" Width="170" Click="screenshotButton_Click"/>
+        <Button x:Name="screenshotButton" Content="Take screenshot" HorizontalAlignment="Left" Margin="10,52,0,10" Width="170" Click="screenshotButton_Click"/>
 
     </Grid>
 </Window>

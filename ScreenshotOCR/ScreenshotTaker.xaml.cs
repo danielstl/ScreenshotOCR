@@ -122,42 +122,7 @@ namespace ScreenshotOCR
                         Cursor = Cursors.Arrow;
                         var text = page.GetText();
 
-                        MessageBox.Show("Found the following text:\n\n" + text);
-                            /*msg += ("Text (iterator):");
-                            using (var iter = page.GetIterator())
-                            {
-                                iter.Begin();
-
-                                do
-                                {
-                                    do
-                                    {
-                                        do
-                                        {
-                                            do
-                                            {
-                                                if (iter.IsAtBeginningOf(PageIteratorLevel.Block))
-                                                {
-                                                    msg += ("<BLOCK>\n");
-                                                }
-
-                                                msg += (iter.GetText(PageIteratorLevel.Word));
-                                                msg += (" ");
-
-                                                if (iter.IsAtFinalOf(PageIteratorLevel.TextLine, PageIteratorLevel.Word))
-                                                {
-                                                msg += "\n";
-                                                }
-                                            } while (iter.Next(PageIteratorLevel.TextLine, PageIteratorLevel.Word));
-
-                                            if (iter.IsAtFinalOf(PageIteratorLevel.Para, PageIteratorLevel.TextLine))
-                                            {
-                                            msg += "\n";
-                                            }
-                                        } while (iter.Next(PageIteratorLevel.Para, PageIteratorLevel.TextLine));
-                                    } while (iter.Next(PageIteratorLevel.Block, PageIteratorLevel.Para));
-                                } while (iter.Next(PageIteratorLevel.Block));
-                        }*/
+                        new OCRResultsWindow(text).Show();
                     }
                 }
             }
