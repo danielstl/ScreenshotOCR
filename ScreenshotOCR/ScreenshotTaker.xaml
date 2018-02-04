@@ -9,9 +9,11 @@
         AllowsTransparency="True"
         WindowState="Maximized"
         ResizeMode="NoResize"
-        Title="ScreenshotTaker" PreviewKeyDown="Window_PreviewKeyDown" PreviewMouseDown="Window_PreviewMouseDown" PreviewMouseUp="Window_PreviewMouseUp" PreviewMouseMove="Window_PreviewMouseMove">
+        Title="ScreenshotTaker" PreviewKeyDown="Window_PreviewKeyDown" PreviewMouseDown="Window_PreviewMouseDown" PreviewMouseUp="Window_PreviewMouseUp" PreviewMouseMove="Window_PreviewMouseMove" Cursor="Cross">
     <Grid>
+        <Canvas Name="imageCanvas">
+            <local:ActionButtons x:Name="actions" Width="180" Height="40" Visibility="Hidden" Panel.ZIndex="100"></local:ActionButtons>
+        </Canvas>
         <Label Name="debug" Content="Drag to select a screenshot area" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Rectangle Name="regionSelector" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="129" Margin="207,117,0,0" Stroke="Black" VerticalAlignment="Top" Width="178"/>
     </Grid>
 </Window>

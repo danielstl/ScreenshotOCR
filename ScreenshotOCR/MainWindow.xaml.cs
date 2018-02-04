@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,7 +28,10 @@ namespace ScreenshotOCR
 
         private void screenshotButton_Click(object sender, RoutedEventArgs e)
         {
-            new ScreenshotTaker().Show();
+            Hide();
+            Thread.Sleep(250);
+            new ScreenshotTaker().ShowDialog();
+            Show();
         }
     }
 }

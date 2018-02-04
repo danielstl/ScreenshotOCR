@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="ScreenshotOCR.ActionButtons"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ScreenshotOCR"
+             mc:Ignorable="d" Height="40" MinHeight="40" Width="180" MinWidth="180">
+    <Grid Background="#FFF7F7F7">
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+            <Button Name="screenshotButton" Width="40" Content="screenshot" Background="{x:Null}"/>
+            <Button Name="ocrButton" Width="40" Content="ocr"/>
+            <Button Name="saveButton" Width="40" Content="save"/>
+        </StackPanel>
+
+    </Grid>
+</UserControl>
