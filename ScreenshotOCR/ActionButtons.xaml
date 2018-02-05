@@ -4,12 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ScreenshotOCR"
-             mc:Ignorable="d" Height="40" MinHeight="40" Width="180" MinWidth="180">
+             mc:Ignorable="d" Height="40" MinHeight="40" Width="Auto">
     <Grid Background="#FFF7F7F7">
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-            <Button Name="screenshotButton" Width="40" Content="screenshot" Background="{x:Null}"/>
-            <Button Name="ocrButton" Width="40" Content="ocr"/>
-            <Button Name="saveButton" Width="40" Content="save"/>
+            <Button Name="screenshotButton" Width="40" Content="screenshot" Background="#FFE0E0E0" BorderBrush="{x:Null}" Click="screenshotButton_Click"/>
+            <Button Name="ocrButton" Width="40" Content="ocr" Background="#FFE0E0E0" BorderBrush="{x:Null}" Click="ocrButton_Click"/>
+            <Button Name="retakeButton" Width="40" Content="save" Background="#FFE0E0E0" BorderBrush="{x:Null}" Click="retakeButton_Click"/>
+            <Button Name="closeButton" Width="40" Content="X" Background="#FFE0E0E0" BorderBrush="{x:Null}" Click="closeButton_Click"/>
         </StackPanel>
 
     </Grid>

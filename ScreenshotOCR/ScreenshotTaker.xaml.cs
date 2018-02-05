@@ -15,6 +15,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Tesseract;
@@ -45,12 +46,13 @@ namespace ScreenshotOCR
 
         private Bitmap screenshot;
         private System.Windows.Point dragStart, dragEnd;
-        private bool mouseDown, screenshotTaken;
+        private bool mouseDown, screenshotRegionSelected;
         private System.Windows.Shapes.Path canvasPath;
+        private string ocrResult;
 
         private void Window_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (screenshotTaken) return;
+            if (screenshotRegionSelected) return;
             dragStart = dragEnd = e.GetPosition(this);
             mouseDown = true;
             DrawCanvas();
@@ -59,7 +61,7 @@ namespace ScreenshotOCR
 
         private void Window_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (screenshotTaken) return;
+            if (screenshotRegionSelected) return;
             dragEnd = e.GetPosition(this);
             mouseDown = false;
             DrawCanvas();
@@ -69,7 +71,7 @@ namespace ScreenshotOCR
 
         private void Window_PreviewMouseMove(object sender, MouseEventArgs e)
         {
-            if (!mouseDown || screenshotTaken) return;
+            if (!mouseDown || screenshotRegionSelected) return;
             dragEnd = e.GetPosition(this);
 
             DrawCanvas();
@@ -83,56 +85,49 @@ namespace ScreenshotOCR
             }
         }
 
-        private void HandleScreenshot()
+        private void actions_OnCloseButtonClick(object sender, EventArgs e)
         {
-            screenshotTaken = true;
+
+        }
+
+        private void actions_OnOCRButtonClick(object sender, EventArgs e)
+        {
+            //todo display loading msg or whatever
+            if (ocrResult == null)
+            {
+                MessageBox.Show("ocr not complete");
+                return;
+            }
+            new OCRResultsWindow(ocrResult).Show();
+        }
+
+        private void actions_OnRetakeButtonClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void actions_OnScreenshotButtonClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void HandleScreenshot()
+        {
+            screenshotRegionSelected = true;
 
             ReleaseMouseCapture();
 
-            Cursor = Cursors.Wait;
-
             double mx = Math.Max(dragStart.X, dragEnd.X);
             double my = Math.Max(dragStart.Y, dragEnd.Y);
-            actions.SetValue(Canvas.LeftProperty, mx);
-            actions.SetValue(Canvas.TopProperty, my);
+            actions.SetValue(Canvas.LeftProperty, mx - actions.ActualWidth);
+            actions.SetValue(Canvas.TopProperty, my + 2);
 
             actions.Opacity = 0;
             actions.Visibility = Visibility.Visible;
 
             actions.BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.1)));
 
-            int width = (int) (Math.Max(dragStart.X, dragEnd.X) - Math.Min(dragStart.X, dragEnd.X));
-            int height = (int) (Math.Max(dragStart.Y, dragEnd.Y) - Math.Min(dragStart.Y, dragEnd.Y));
-
-            int scale = 8;
-
-            var img = new Bitmap(width*scale, height*scale);
-            using (Graphics g = Graphics.FromImage(img))
-            {
-                g.DrawImage(screenshot, new System.Drawing.Rectangle(0, 0, width*scale, height*scale), new System.Drawing.Rectangle((int) Math.Min(dragStart.X, dragEnd.X), (int) Math.Min(dragStart.Y, dragEnd.Y), width, height), GraphicsUnit.Pixel);
-            }
-
-            img.Save(@"C:\Users\Daniel\Pictures\testimg.bmp");
-            try
-            {
-                using (var engine = new TesseractEngine(@"./tessdata", "eng", EngineMode.Default))
-                {
-                        using (var page = engine.Process(PixConverter.ToPix(img)))
-                        {
-                        Cursor = Cursors.Arrow;
-                        var text = page.GetText();
-
-                        new OCRResultsWindow(text).Show();
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Trace.TraceError(e.ToString());
-                Console.WriteLine("Unexpected Error: " + e.Message);
-                Console.WriteLine("Details: ");
-                Console.WriteLine(e.ToString());
-            }
+            ocrResult = await Screenshot.PerformOcr(screenshot, dragStart, dragEnd);
         }
 
         private void DrawCanvas()

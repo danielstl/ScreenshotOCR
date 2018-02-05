@@ -12,7 +12,7 @@
         Title="ScreenshotTaker" PreviewKeyDown="Window_PreviewKeyDown" PreviewMouseDown="Window_PreviewMouseDown" PreviewMouseUp="Window_PreviewMouseUp" PreviewMouseMove="Window_PreviewMouseMove" Cursor="Cross">
     <Grid>
         <Canvas Name="imageCanvas">
-            <local:ActionButtons x:Name="actions" Width="180" Height="40" Visibility="Hidden" Panel.ZIndex="100"></local:ActionButtons>
+            <local:ActionButtons x:Name="actions" Width="Auto" Height="40" Visibility="Hidden" Panel.ZIndex="100" OnCloseButtonClick="actions_OnCloseButtonClick" OnOCRButtonClick="actions_OnOCRButtonClick" OnRetakeButtonClick="actions_OnRetakeButtonClick" OnScreenshotButtonClick="actions_OnScreenshotButtonClick"></local:ActionButtons>
         </Canvas>
         <Label Name="debug" Content="Drag to select a screenshot area" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
     </Grid>

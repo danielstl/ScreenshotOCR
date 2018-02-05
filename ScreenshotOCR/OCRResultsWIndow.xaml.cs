@@ -30,5 +30,18 @@ namespace ScreenshotOCR
         {
             Topmost = !Topmost;
         }
+
+        private void resultsTextBox_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                DragMove();
+            }
+        }
     }
 }
