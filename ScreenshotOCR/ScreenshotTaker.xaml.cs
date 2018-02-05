@@ -50,13 +50,16 @@ namespace ScreenshotOCR
         private System.Windows.Shapes.Path canvasPath;
         private string ocrResult;
 
+        #region Window mouse events
         private void Window_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (screenshotRegionSelected) return;
             dragStart = dragEnd = e.GetPosition(this);
             mouseDown = true;
             DrawCanvas();
-            CaptureMouse();
+            CaptureMouse(); //always get mouse events when dragging
+
+            helpLabel.BeginAnimation(OpacityProperty, new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.1))); //fade out 'drag to screenshot' label when starting the screenshot
         }
 
         private void Window_PreviewMouseUp(object sender, MouseButtonEventArgs e)
@@ -84,7 +87,9 @@ namespace ScreenshotOCR
                 Close();
             }
         }
+        #endregion
 
+        #region Handling action buttons
         private void actions_OnCloseButtonClick(object sender, EventArgs e)
         {
 
@@ -110,6 +115,7 @@ namespace ScreenshotOCR
         {
 
         }
+        #endregion
 
         private async void HandleScreenshot()
         {
@@ -117,8 +123,11 @@ namespace ScreenshotOCR
 
             ReleaseMouseCapture();
 
-            double mx = Math.Max(dragStart.X, dragEnd.X);
-            double my = Math.Max(dragStart.Y, dragEnd.Y);
+            Cursor = Cursors.Arrow;
+
+            double mx = Math.Max(actions.ActualWidth, Math.Max(dragStart.X, dragEnd.X));
+            double my = Math.Min(SystemParameters.PrimaryScreenHeight - actions.ActualHeight, Math.Max(dragStart.Y, dragEnd.Y)); //prevents action bar running off display edges
+
             actions.SetValue(Canvas.LeftProperty, mx - actions.ActualWidth);
             actions.SetValue(Canvas.TopProperty, my + 2);
 
@@ -132,12 +141,13 @@ namespace ScreenshotOCR
 
         private void DrawCanvas()
         {
-            debug.Content = mouseDown + "";
-            var path = new System.Windows.Shapes.Path();
-            path.Stroke = new SolidColorBrush(Colors.DarkGray);
-            path.StrokeThickness = 2;
-            path.Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 255, 255, 255));
-            path.Data = new CombinedGeometry(GeometryCombineMode.Exclude, new RectangleGeometry(new System.Windows.Rect(-1, -1, SystemParameters.PrimaryScreenWidth + 2, SystemParameters.PrimaryScreenHeight + 2)), new RectangleGeometry(new System.Windows.Rect(dragStart, dragEnd)));
+            var path = new System.Windows.Shapes.Path()
+            {
+                Stroke = new SolidColorBrush(Colors.DarkGray),
+                StrokeThickness = 2,
+                Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 255, 255, 255)),
+                Data = new CombinedGeometry(GeometryCombineMode.Exclude, new RectangleGeometry(new System.Windows.Rect(-1, -1, SystemParameters.PrimaryScreenWidth + 2, SystemParameters.PrimaryScreenHeight + 2)), new RectangleGeometry(new System.Windows.Rect(dragStart, dragEnd)))
+            };
             imageCanvas.Children.Remove(canvasPath);
             canvasPath = path;
 

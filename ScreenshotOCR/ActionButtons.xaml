@@ -7,10 +7,26 @@
              mc:Ignorable="d" Height="40" MinHeight="40" Width="Auto">
     <Grid Background="#FFF7F7F7">
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-            <Button Name="screenshotButton" Width="40" Content="screenshot" Background="#FFE0E0E0" BorderBrush="{x:Null}" Click="screenshotButton_Click"/>
-            <Button Name="ocrButton" Width="40" Content="ocr" Background="#FFE0E0E0" BorderBrush="{x:Null}" Click="ocrButton_Click"/>
-            <Button Name="retakeButton" Width="40" Content="save" Background="#FFE0E0E0" BorderBrush="{x:Null}" Click="retakeButton_Click"/>
-            <Button Name="closeButton" Width="40" Content="X" Background="#FFE0E0E0" BorderBrush="{x:Null}" Click="closeButton_Click"/>
+            <Button Name="retakeButton" Width="40" BorderBrush="{x:Null}" Click="retakeButton_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/action_retake.png"/>
+                </Button.Background>
+            </Button>
+            <Button Name="ocrButton" Width="40" BorderBrush="{x:Null}" Click="ocrButton_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/action_ocr.png"/>
+                </Button.Background>
+            </Button>
+            <Button Name="screenshotButton" Width="40" BorderBrush="{x:Null}" Click="screenshotButton_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/action_save.png"/>
+                </Button.Background>
+            </Button>
+            <Button Name="closeButton" Width="40" BorderBrush="{x:Null}" Click="closeButton_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/action_close.png"/>
+                </Button.Background>
+            </Button>
         </StackPanel>
 
     </Grid>
