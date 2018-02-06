@@ -49,6 +49,8 @@ namespace ScreenshotOCR
         private bool mouseDown, screenshotRegionSelected;
         private System.Windows.Shapes.Path canvasPath;
         private string ocrResult;
+        private Task<string> ocrResultTask;
+        private int screenshotId;
 
         #region Window mouse events
         private void Window_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -92,34 +94,45 @@ namespace ScreenshotOCR
         #region Handling action buttons
         private void actions_OnCloseButtonClick(object sender, EventArgs e)
         {
-
+            Close();
         }
 
         private void actions_OnOCRButtonClick(object sender, EventArgs e)
         {
-            //todo display loading msg or whatever
-            if (ocrResult == null)
+            if (ocrResult != null)
             {
-                MessageBox.Show("ocr not complete");
-                return;
+                new OCRResultsWindow(ocrResult).Show();
+            } else
+            {
+                new OCRResultsWindow(ocrResultTask).Show();
             }
-            new OCRResultsWindow(ocrResult).Show();
         }
 
         private void actions_OnRetakeButtonClick(object sender, EventArgs e)
         {
+            ocrResult = null;
+            screenshotRegionSelected = false;
 
+            dragStart = dragEnd = default(System.Windows.Point);
+            DrawCanvas();
+
+            actions.Visibility = Visibility.Hidden;
+            helpLabel.Opacity = 1;
+
+            Cursor = Cursors.Cross;
         }
 
         private void actions_OnScreenshotButtonClick(object sender, EventArgs e)
         {
-
+            
         }
         #endregion
 
         private async void HandleScreenshot()
         {
             screenshotRegionSelected = true;
+
+            int oid = ++screenshotId;
 
             ReleaseMouseCapture();
 
@@ -136,7 +149,8 @@ namespace ScreenshotOCR
 
             actions.BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.1)));
 
-            ocrResult = await Screenshot.PerformOcr(screenshot, dragStart, dragEnd);
+            string res = await (ocrResultTask = Screenshot.PerformOcr(screenshot, dragStart, dragEnd));
+            if (oid == screenshotId) ocrResult = res;
         }
 
         private void DrawCanvas()
