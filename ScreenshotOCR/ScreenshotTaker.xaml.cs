@@ -126,6 +126,15 @@ namespace ScreenshotOCR
         {
             
         }
+
+        private void actions_OnClipboardButtonClick(object sender, EventArgs e)
+        {
+            var file = System.IO.Path.GetTempFileName();
+            var ns = screenshot.Clone(screenshot.GetScreenshotBounds(dragStart, dragEnd), System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            ns.Save(file, System.Drawing.Imaging.ImageFormat.Png);
+
+            Clipboard.SetImage(new BitmapImage(new Uri(file)));
+        }
         #endregion
 
         private async void HandleScreenshot()

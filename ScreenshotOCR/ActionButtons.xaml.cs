@@ -20,7 +20,7 @@ namespace ScreenshotOCR
     /// </summary>
     public partial class ActionButtons : UserControl
     {
-        public event EventHandler OnOCRButtonClick, OnScreenshotButtonClick, OnRetakeButtonClick, OnCloseButtonClick;
+        public event EventHandler OnOCRButtonClick, OnScreenshotButtonClick, OnClipboardButtonClick, OnRetakeButtonClick, OnCloseButtonClick;
 
         private void retakeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -30,6 +30,11 @@ namespace ScreenshotOCR
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             OnCloseButtonClick?.Invoke(sender, e);
+        }
+
+        private void clipboardButton_Click(object sender, RoutedEventArgs e)
+        {
+            OnClipboardButtonClick?.Invoke(sender, e);
         }
 
         private void ocrButton_Click(object sender, RoutedEventArgs e)

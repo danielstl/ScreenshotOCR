@@ -8,7 +8,7 @@ using Tesseract;
 
 namespace ScreenshotOCR
 {
-    class Screenshot
+    public static class Screenshot
     {
         public static Bitmap CaptureScreenshot(System.Drawing.Point pos, System.Drawing.Size size)
         {
@@ -28,12 +28,12 @@ namespace ScreenshotOCR
                  int width = (int)(Math.Max(ds.X, de.X) - Math.Min(ds.X, de.X));
                  int height = (int)(Math.Max(ds.Y, de.Y) - Math.Min(ds.Y, de.Y));
 
-                 int scale = 8;
+                 int scale = 8; //attempts to improve the ocr accuracy, sorta a hack
 
                  var img = new Bitmap(width * scale, height * scale);
                  using (Graphics g = Graphics.FromImage(img))
                  {
-                     g.DrawImage(screenshot, new Rectangle(0, 0, width * scale, height * scale), new Rectangle((int)Math.Min(ds.X, de.X), (int)Math.Min(ds.Y, de.Y), width, height), GraphicsUnit.Pixel);
+                     g.DrawImage(screenshot, new Rectangle(0, 0, width * scale, height * scale), img.GetScreenshotBounds(ds, de), GraphicsUnit.Pixel);
                  }
 
                  var text = "";
@@ -56,6 +56,14 @@ namespace ScreenshotOCR
 
                  return text;
              });
+        }
+
+        public static Rectangle GetScreenshotBounds(this Bitmap bmp, System.Windows.Point dragStart, System.Windows.Point dragEnd)
+        {
+            int width = (int)(Math.Max(dragStart.X, dragEnd.X) - Math.Min(dragStart.X, dragEnd.X));
+            int height = (int)(Math.Max(dragStart.Y, dragEnd.Y) - Math.Min(dragStart.Y, dragEnd.Y));
+
+            return new Rectangle((int)Math.Min(dragStart.X, dragEnd.X), (int)Math.Min(dragStart.Y, dragEnd.Y), width, height);
         }
     }
 }

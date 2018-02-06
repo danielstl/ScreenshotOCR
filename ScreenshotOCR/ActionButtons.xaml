@@ -17,6 +17,11 @@
                     <ImageBrush ImageSource="Resources/action_ocr.png"/>
                 </Button.Background>
             </Button>
+            <Button Name="clipboardButton" Width="40" BorderBrush="{x:Null}" Click="clipboardButton_Click" Content="clipboard (temp)">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/action_save.png"/>
+                </Button.Background>
+            </Button>
             <Button Name="screenshotButton" Width="40" BorderBrush="{x:Null}" Click="screenshotButton_Click">
                 <Button.Background>
                     <ImageBrush ImageSource="Resources/action_save.png"/>

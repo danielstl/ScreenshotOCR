@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ScreenshotOCR"
         mc:Ignorable="d" Opacity="0.98"
         Height="280" Width="500" Topmost="True" WindowStyle="None" Background="Transparent" AllowsTransparency="True" MouseDown="Window_MouseDown">
     <Border BorderThickness="3" CornerRadius="1">
@@ -31,7 +30,7 @@
             </Grid>
             <StackPanel Name="loadingPanel" VerticalAlignment="Center">
                 <Image Source="pack://siteoforigin:,,,/Resources/action_ocr.png" Width="32"/>
-                <Label Content="Performing OCR on image..." FontSize="22" HorizontalContentAlignment="Center"/>
+                <Label Content="Performing OCR on your screenshot..." FontSize="22" HorizontalContentAlignment="Center"/>
                 <ProgressBar Height="18" Width="280" IsIndeterminate="True" Margin="0,20,0,0" Foreground="#FF33ACFF"/>
             </StackPanel>
         </Grid>
