@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Shell;
@@ -19,21 +21,29 @@ namespace ScreenshotOCR
         {
             base.OnStartup(e);
 
+            var iconsDll = Path.GetDirectoryName(Assembly.GetEntryAssembly().CodeBase).Replace("\\", "/") + "/ScreenshotOCRIcons.dll";
+
             var screenshotTask = new JumpTask()
             {
                 Title = "Take instant screenshot",
                 Description = "Immediately launch screenshot mode",
                 Arguments = "/screenshot",
-                IconResourcePath = Assembly.GetEntryAssembly().CodeBase,
+               // IconResourcePath = "C:/Users/Daniel/Documents/Visual Studio 2017/Projects/ScreenshotOCR/ScreenshotOCR/bin/Debug/ScreenshotOCRIcons.dll",
+                //IconResourcePath = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().CodeBase), "ScreenshotOCRIcons.dll"),
+                IconResourcePath = iconsDll,
+                IconResourceIndex = 0,
                 ApplicationPath = Assembly.GetEntryAssembly().CodeBase
             };
+
+            var s = Assembly.GetEntryAssembly();
 
             var settingsTask = new JumpTask()
             {
                 Title = "Settings",
                 Description = "Edit ScreenshotOCR settings",
                 Arguments = "/settings",
-                IconResourcePath = Assembly.GetEntryAssembly().CodeBase,
+                IconResourcePath = iconsDll,
+                IconResourceIndex = 1,
                 ApplicationPath = Assembly.GetEntryAssembly().CodeBase
             };
 

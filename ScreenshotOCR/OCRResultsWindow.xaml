@@ -22,11 +22,11 @@
             <Grid Name="contentGrid" Visibility="Hidden">
                 <Label Content="The following text was found in your screenshot" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <TextBox Name="resultsTextBox" Margin="0,26,0,30" TextWrapping="Wrap" Padding="5" VerticalScrollBarVisibility="Auto" IsReadOnly="True" IsReadOnlyCaretVisible="True" MouseDown="resultsTextBox_MouseDown"/>
-                <StackPanel Margin="0,249,0,0" Orientation="Horizontal" HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="25" VerticalAlignment="Bottom">
                     <Button Name="copyButton" Content="Copy to Clipboard" Click="copyButton_Click" Padding="10,0,10,0" Margin="0,0,5,0"/>
                     <Button Name="pinButton" Content="Pin" Click="pinButton_Click" Width="30"/>
                 </StackPanel>
-                <Button Name="closeButton" Content="X" Click="closeButton_Click" Margin="469,3,0,250"/>
+                <Button Name="closeButton" Content="X" Click="closeButton_Click" Margin="0,3,0,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Right" Width="25"/>
             </Grid>
             <StackPanel Name="loadingPanel" VerticalAlignment="Center">
                 <Image Source="pack://siteoforigin:,,,/Resources/action_ocr.png" Width="32"/>
