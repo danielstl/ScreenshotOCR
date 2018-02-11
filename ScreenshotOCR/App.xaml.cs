@@ -28,8 +28,6 @@ namespace ScreenshotOCR
                 Title = "Take instant screenshot",
                 Description = "Immediately launch screenshot mode",
                 Arguments = "/screenshot",
-               // IconResourcePath = "C:/Users/Daniel/Documents/Visual Studio 2017/Projects/ScreenshotOCR/ScreenshotOCR/bin/Debug/ScreenshotOCRIcons.dll",
-                //IconResourcePath = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().CodeBase), "ScreenshotOCRIcons.dll"),
                 IconResourcePath = iconsDll,
                 IconResourceIndex = 0,
                 ApplicationPath = Assembly.GetEntryAssembly().CodeBase

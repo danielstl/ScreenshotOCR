@@ -5,10 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ScreenshotOCR"
         mc:Ignorable="d"
-        Title="MainWindow" Height="170" Width="500">
+        WindowStyle="None"
+        Title="ScreenshotOCR" Height="110" Width="350" AllowsTransparency="True" Background="White">
     <Grid>
-        <Label Content="ScreenshotOCR" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe UI Semilight"/>
-        <Button x:Name="screenshotButton" Content="Take screenshot" HorizontalAlignment="Left" Margin="10,52,0,10" Width="170" Click="screenshotButton_Click"/>
-
+        <Label Content="ScreenshotOCR" HorizontalAlignment="Left" Margin="47,10,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe UI Semilight" Width="170"/>
+        <Button x:Name="screenshotButton" Margin="10,62,140,10" Click="screenshotButton_Click">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="Resources/main_screenshot.png" Width="24"/>
+                <Label Content="Take screenshot" VerticalContentAlignment="Center"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="settingsButton" Margin="0,62,10,10" Click="settingsButton_Click" HorizontalAlignment="Right" Width="125">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="Resources/main_settings.png" Width="24"/>
+                <Label Content="Settings" VerticalContentAlignment="Center"/>
+                <!--todo fix jagged images-->
+            </StackPanel>
+        </Button>
+        <Image HorizontalAlignment="Left" Height="32" Margin="10,13,0,0" VerticalAlignment="Top" Width="32" Source="logo.ico" MouseDown="Image_MouseDown"/>
+        <Button x:Name="closeButton" Margin="325,5,5,0" VerticalAlignment="Top" Height="20" Background="{x:Null}" BorderBrush="{x:Null}" Click="closeButton_Click">
+            <Image Source="Resources/action_close.png"/>
+        </Button>
     </Grid>
 </Window>

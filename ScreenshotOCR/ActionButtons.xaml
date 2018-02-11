@@ -4,33 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ScreenshotOCR"
-             mc:Ignorable="d" Height="40" MinHeight="40" Width="Auto">
+             mc:Ignorable="d" Height="48" MinHeight="48" Width="Auto">
     <Grid Background="#FFF7F7F7">
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-            <Button Name="retakeButton" Width="40" BorderBrush="{x:Null}" Click="retakeButton_Click">
-                <Button.Background>
-                    <ImageBrush ImageSource="Resources/action_retake.png"/>
-                </Button.Background>
+            <Button Name="retakeButton" Width="48" BorderBrush="{x:Null}" Click="retakeButton_Click" Background="White">
+                <Image Source="Resources/action_retake.png"/>
             </Button>
-            <Button Name="ocrButton" Width="40" BorderBrush="{x:Null}" Click="ocrButton_Click">
-                <Button.Background>
-                    <ImageBrush ImageSource="Resources/action_ocr.png"/>
-                </Button.Background>
+            <Button Name="ocrButton" Width="48" BorderBrush="{x:Null}" Click="ocrButton_Click" Background="White">
+                <Image Source="Resources/action_ocr.png"/>
             </Button>
-            <Button Name="clipboardButton" Width="40" BorderBrush="{x:Null}" Click="clipboardButton_Click" Content="clipboard (temp)">
-                <Button.Background>
-                    <ImageBrush ImageSource="Resources/action_save.png"/>
-                </Button.Background>
+            <Button Name="clipboardButton" Width="48" BorderBrush="{x:Null}" Click="clipboardButton_Click" Background="White">
+                <Image Source="Resources/action_clipboard.png"/>
             </Button>
-            <Button Name="screenshotButton" Width="40" BorderBrush="{x:Null}" Click="screenshotButton_Click">
-                <Button.Background>
-                    <ImageBrush ImageSource="Resources/action_save.png"/>
-                </Button.Background>
+            <Button Name="screenshotButton" Width="48" BorderBrush="{x:Null}" Click="screenshotButton_Click" Background="White">
+                <Image Source="Resources/action_save.png"/>
             </Button>
-            <Button Name="closeButton" Width="40" BorderBrush="{x:Null}" Click="closeButton_Click">
-                <Button.Background>
-                    <ImageBrush ImageSource="Resources/action_close.png"/>
-                </Button.Background>
+            <Button Name="closeButton" Width="48" BorderBrush="{x:Null}" Click="closeButton_Click" Background="White">
+                <Image Source="Resources/action_close.png"/>
             </Button>
         </StackPanel>
 
