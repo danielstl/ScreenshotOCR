@@ -28,7 +28,12 @@ namespace ScreenshotOCR
 
             loadingPanel.Visibility = Visibility.Hidden;
             contentGrid.Visibility = Visibility.Visible;
+
+            pinPinned = new BitmapImage(new Uri("Resources/pin_pinned.png", UriKind.Relative));
+            pinUnpinned = new BitmapImage(new Uri("Resources/pin_unpinned.png", UriKind.Relative));
         }
+
+        private readonly ImageSource pinPinned, pinUnpinned;
 
         public OCRResultsWindow(Task<string> results)
         {
@@ -50,6 +55,8 @@ namespace ScreenshotOCR
         private void pinButton_Click(object sender, RoutedEventArgs e)
         {
             Topmost = !Topmost;
+
+            pinIcon.Source = Topmost ? pinPinned : pinUnpinned;
         }
 
         private void resultsTextBox_MouseDown(object sender, MouseButtonEventArgs e)

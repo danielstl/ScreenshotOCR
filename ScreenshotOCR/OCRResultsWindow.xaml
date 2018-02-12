@@ -3,36 +3,31 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" Opacity="0.98"
-        Height="280" Width="500" Topmost="True" WindowStyle="None" Background="Transparent" AllowsTransparency="True" MouseDown="Window_MouseDown">
-    <Border BorderThickness="3" CornerRadius="1">
-        <Border.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FFE0E0E0" Offset="1"/>
-                <GradientStop Color="White"/>
-            </LinearGradientBrush>
-        </Border.Background>
-        <Border.BorderBrush>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FFE0E0E0" Offset="1"/>
-                <GradientStop Color="White"/>
-            </LinearGradientBrush>
-        </Border.BorderBrush>
-        <Grid>
-            <Grid Name="contentGrid" Visibility="Hidden">
-                <Label Content="The following text was found in your screenshot" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <TextBox Name="resultsTextBox" Margin="0,26,0,30" TextWrapping="Wrap" Padding="5" VerticalScrollBarVisibility="Auto" IsReadOnly="True" IsReadOnlyCaretVisible="True" MouseDown="resultsTextBox_MouseDown"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="25" VerticalAlignment="Bottom">
-                    <Button Name="copyButton" Content="Copy to Clipboard" Click="copyButton_Click" Padding="10,0,10,0" Margin="0,0,5,0"/>
-                    <Button Name="pinButton" Content="Pin" Click="pinButton_Click" Width="30"/>
-                </StackPanel>
-                <Button Name="closeButton" Content="X" Click="closeButton_Click" Margin="0,3,0,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Right" Width="25"/>
-            </Grid>
-            <StackPanel Name="loadingPanel" VerticalAlignment="Center">
-                <Image Source="pack://siteoforigin:,,,/Resources/action_ocr.png" Width="32"/>
-                <Label Content="Performing OCR on your screenshot..." FontSize="22" HorizontalContentAlignment="Center"/>
-                <ProgressBar Height="18" Width="280" IsIndeterminate="True" Margin="0,20,0,0" Foreground="#FF33ACFF"/>
+        mc:Ignorable="d"
+        Height="280" Width="500" Topmost="True" WindowStyle="None" Background="White" AllowsTransparency="True" MouseDown="Window_MouseDown">
+    <Grid>
+        <Grid Name="contentGrid" Visibility="Hidden">
+            <Label Content="The following text was found in your screenshot" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0,0,0" Width="290"/>
+            <TextBox Name="resultsTextBox" Margin="5,26,5,34" TextWrapping="Wrap" Padding="5" VerticalScrollBarVisibility="Auto" IsReadOnly="True" IsReadOnlyCaretVisible="True" MouseDown="resultsTextBox_MouseDown"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="24" VerticalAlignment="Bottom" Margin="0,0,5,5">
+                <Button x:Name="copyButton" Click="copyButton_Click" Background="#FFF7F7F7" Padding="10,0,10,0" Margin="0,0,5,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/action_clipboard.png" Width="16" Margin="0,0,3,0"/>
+                        <Label Content="Copy" VerticalContentAlignment="Center" Padding="0"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="pinButton" Click="pinButton_Click" Width="30" Background="#FFF7F7F7">
+                    <Image x:Name="pinIcon" Source="Resources/pin_pinned.png" Width="16"/>
+                </Button>
             </StackPanel>
+            <Button Name="closeButton" Margin="0,5,5,0" VerticalAlignment="Top" Height="20" Background="{x:Null}" BorderBrush="{x:Null}" Click="closeButton_Click" HorizontalAlignment="Right" Width="22">
+                <Image Source="Resources/action_close.png"/>
+            </Button>
         </Grid>
-    </Border>
+        <StackPanel Name="loadingPanel" VerticalAlignment="Center">
+            <Image Source="pack://siteoforigin:,,,/Resources/action_ocr.png" Width="32"/>
+            <Label Content="Performing OCR on your screenshot..." FontSize="22" HorizontalContentAlignment="Center"/>
+            <ProgressBar Height="18" Width="280" IsIndeterminate="True" Margin="0,20,0,0" Foreground="#FF33ACFF"/>
+        </StackPanel>
+    </Grid>
 </Window>
